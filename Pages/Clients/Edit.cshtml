@@ -1,0 +1,45 @@
+﻿@page "{id:int}"
+@model PostgreSQL.Data.EditModel
+@{
+}
+
+<br>
+<h2>Edit Client</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Client.Id" />
+
+    <!-- Nume -->
+    <div class="form-group">
+        <label asp-for="Client.Name" class="control-label">Name</label>
+        <input asp-for="Client.Name" class="form-control" />
+        <span asp-validation-for="Client.Name" class="text-danger"></span>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+        <label asp-for="Client.Email" class="control-label">Email</label>
+        <input asp-for="Client.Email" class="form-control" />
+        <span asp-validation-for="Client.Email" class="text-danger"></span>
+    </div>
+
+    <!-- Telefon -->
+    <div class="form-group">
+        <label asp-for="Client.Phone" class="control-label">Phone</label>
+        <input asp-for="Client.Phone" class="form-control" />
+        <span asp-validation-for="Client.Phone" class="text-danger"></span>
+    </div>
+
+    <!-- Adresa -->
+    <div class="form-group">
+        <label asp-for="Client.Address" class="control-label">Address</label>
+        <input asp-for="Client.Address" class="form-control" />
+        <span asp-validation-for="Client.Address" class="text-danger"></span>
+    </div>
+
+    <!-- Buton de Salvare -->
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a class="btn btn-outline-secondary" href="/Clients/Index">Cancel</a>
+    </div>
+</form>
