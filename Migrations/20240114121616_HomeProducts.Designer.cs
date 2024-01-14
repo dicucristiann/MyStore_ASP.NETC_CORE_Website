@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using PostgreSQL.Data;
 
 #nullable disable
 
 namespace MyStore_ASP_NET_CORE_WebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240114121616_HomeProducts")]
+    partial class HomeProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,56 @@ namespace MyStore_ASP_NET_CORE_WebApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MyStore_ASP_NET_CORE_WebApp.Data.Cart", b =>
+            modelBuilder.Entity("MyStore_ASP_NET_CORE_WebApp.Data.Communication", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CustomerEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Communications");
+                });
+
+            modelBuilder.Entity("MyStore_ASP_NET_CORE_WebApp.Data.PostgreSQL.Data.HomeProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HomeProducts");
+                });
+
+            modelBuilder.Entity("PostgreSQL.Data.ShopCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +91,7 @@ namespace MyStore_ASP_NET_CORE_WebApp.Migrations
 
                     b.HasIndex("HomeProductId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("ShopCart");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Clients", b =>
@@ -74,58 +126,9 @@ namespace MyStore_ASP_NET_CORE_WebApp.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Communication", b =>
+            modelBuilder.Entity("PostgreSQL.Data.ShopCart", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Communications");
-                });
-
-            modelBuilder.Entity("PostgreSQL.Data.HomeProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HomeProducts");
-                });
-
-            modelBuilder.Entity("MyStore_ASP_NET_CORE_WebApp.Data.Cart", b =>
-                {
-                    b.HasOne("PostgreSQL.Data.HomeProduct", "Product")
+                    b.HasOne("MyStore_ASP_NET_CORE_WebApp.Data.PostgreSQL.Data.HomeProduct", "Product")
                         .WithMany()
                         .HasForeignKey("HomeProductId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -1,0 +1,28 @@
+﻿@page
+@model MyStore_ASP_NET_CORE_WebApp.Pages.Purchase.IndexModel
+
+@if (Model.CartItems != null && Model.CartItems.Count > 0)
+{
+    <table class="table table-hover table-responsive">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>   
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

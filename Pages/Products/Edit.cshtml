@@ -1,0 +1,21 @@
+﻿@page
+@model MyStore_ASP_NET_CORE_WebApp.Pages.Products.EditModel
+
+<h2>Edit HomeProduct</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="HomeProduct.Id" />
+    <div>
+        <label asp-for="HomeProduct.Name"></label>
+        <input asp-for="HomeProduct.Name" />
+    </div>
+    <div>
+        <label asp-for="HomeProduct.Description"></label>
+        <input asp-for="HomeProduct.Description" />
+    </div>
+    <div>
+        <label asp-for="HomeProduct.Price"></label>
+        <input asp-for="HomeProduct.Price" />
+    </div>
+    <button type="submit">Save</button>
+</form>

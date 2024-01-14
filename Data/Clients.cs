@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PostgreSQL.Data
+﻿namespace PostgreSQL.Data
 {
     public class Clients
     {

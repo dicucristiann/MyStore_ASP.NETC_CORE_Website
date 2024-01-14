@@ -1,0 +1,15 @@
+﻿@page
+@model MyStore_ASP_NET_CORE_WebApp.Pages.Purchase.DeleteModel
+
+<h2>Delete Cart Item</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="CartItem.Id" />
+    <div>
+        <p>Are you sure you want to delete this item?</p>
+        <p><strong>Product ID:</strong> @Model.CartItem.HomeProductId</p>
+        <p><strong>Quantity:</strong> @Model.CartItem.Quantity</p>
+    </div>
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-page="./Index">Cancel</a>
+</form>

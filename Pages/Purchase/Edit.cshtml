@@ -1,0 +1,19 @@
+﻿@page
+@model MyStore_ASP_NET_CORE_WebApp.Pages.Purchase.EditModel
+
+<h2>Edit Cart Item</h2>
+
+<form method="post" class="form-group">
+    <input type="hidden" asp-for="CartItem.Id" />
+    <div class="form-group">
+        <label asp-for="CartItem.Quantity"></label>
+        <input asp-for="CartItem.Quantity" class="form-control" />
+        <span asp-validation-for="CartItem.Quantity" class="text-danger"></span>
+    </div>
+    <!--Save-->
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-page="./Index" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+</form>
+

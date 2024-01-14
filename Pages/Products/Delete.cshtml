@@ -1,0 +1,17 @@
+﻿@page
+@model MyStore_ASP_NET_CORE_WebApp.Pages.Products.DeleteModel
+
+<h2>Delete HomeProduct</h2>
+<h3>Are you sure you want to delete this product?</h3>
+
+<form method="post">
+    <input type="hidden" asp-for="HomeProduct.Id" />
+    <div>
+        <label asp-for="HomeProduct.Name"></label>
+        <input asp-for="HomeProduct.Name" disabled />
+    </div>
+    <div>
+        <input type="submit" value="Delete" /> |
+        <a asp-page="./Index">Cancel</a>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+﻿@page
+@model MyStore_ASP_NET_CORE_WebApp.Pages.Products.IndexModel
+
+<h2>HomeProducts</h2>
+<a asp-page="./Create">Create New</a>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model.HomeProducts)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>@item.Price</td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                <form asp-page="./AddToCart" method="post">
+                    <input type="hidden" name="productId" value="@item.Id" />
+                    <input type="number" name="quantity" value="1" min="1" /> 
+                    <input type="submit" value="Add to Cart" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
